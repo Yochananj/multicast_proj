@@ -42,6 +42,7 @@ class GUI:
         self.confirm_password_button.on_click = lambda _: self._confirm_password_button_on_click()
         self.kill_button.on_click = self._kill_server_on_click
         self.toggle_freeze_button.on_click = lambda _: self._unfreeze_keyboard_and_mouse() if self.server.should_keep_freezing else self._freeze_keyboard_and_mouse()
+        self.death_button.on_click = lambda _: self._death_button_on_click()
 
     def _start_screen_share(self):
         if not self.server.is_sharing_screen:
@@ -92,6 +93,8 @@ class GUI:
         self.server.stop_freeze()
         self.toggle_freeze_button.content.value = "freeze"
 
+    def _death_button_on_click(self):
+        self.server.send_shutdown_command()
 
 
 if __name__ == "__main__":

@@ -129,3 +129,10 @@ class Server:
 
     def stop_freeze(self):
         self.should_keep_freezing = False
+
+    def send_shutdown_command(self):
+        for i in range(5):
+            payload, nonce = self.encrypt_message(json.dumps({"command": "death"}).encode())
+            message = create_packet_header(0, 0, 1, nonce) + payload
+            self.socket.sendto(message, (multicast_group, multicast_port))
+            time.sleep(1)
