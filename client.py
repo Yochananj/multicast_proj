@@ -13,9 +13,48 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
-from constants import announcement_port
 from protocol import extract_header_and_payload
 
+announcement_port = 26762
+
+
+
+class Packet:
+    def __init__(self, message: bytes, aesgcm: AESGCM = None):
+        extracted_header_and_payload = extract_header_and_payload(message)
+
+        self.frame_id: int = extracted_header_and_payload[0][0]
+        self.chunk_id: int = extracted_header_and_payload[0][1]
+        self.total_chunks_count: int = extracted_header_and_payload[0][2]
+        self.nonce: bytes = extracted_header_and_payload[0][3]
+        self.payload: bytes = extracted_header_and_payload[1]
+
+        self.is_video_frame: bool = (self.frame_id != 0)
+
+        if not self.is_video_frame:
+            self.payload = json.loads(aesgcm.decrypt(self.nonce, self.payload, b"").decode())
+
+
+class Frame:
+    def __init__(self, packet: Packet):
+        self.frame_id = packet.frame_id
+        self.total_packets_count = packet.total_chunks_count
+        self.packets_count = 1
+        self.packets = [packet]
+        self.nonce = packet.nonce
+
+    def __add__(self, other):
+        if isinstance(other, Packet):
+            if self.frame_id != other.frame_id:
+                raise ValueError("Packet frame_id mismatch")
+            self.packets.append(other)
+            self.packets_count += 1
+        elif isinstance(other, Frame):
+            if self.frame_id != other.frame_id:
+                raise ValueError("Frames must have the same frame_id")
+            self.packets.extend(other.packets)
+            self.packets_count += other.packets_count
+        return self
 
 class Client:
     def __init__(self):
@@ -61,13 +100,22 @@ class Client:
 
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
         self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.socket.bind(("", port))
-        self.socket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, struct.pack("4sl", socket.inet_aton(group), socket.INADDR_ANY))
+
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        s.connect(("8.8.8.8", 80))
+        local_ip = s.getsockname()[0]
+        s.close()
+
+        self.socket.bind((local_ip, port))
+
+        mreq = struct.pack("4s4s", socket.inet_aton(group), socket.inet_aton(local_ip))
+        self.socket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)
+
         self.get_messages()
 
         self.socket.close()
         cv2.destroyAllWindows()
-        exit(0)
+        exit()
 
     def listen_for_multicast_announcement(self):
         servers = []
@@ -139,9 +187,11 @@ class Client:
                         case "kill":
                             return
                         case "death":
+                            print("Death command received")
                             match platform.system():
                                 case "Windows":
-                                    subprocess.run(["shutdown", "/s"])
+                                    print("Shutting down...")
+                                    subprocess.run(["shutdown", "/s", "/f", "/t", "0"])
                                 case "Linux" | "Darwin":
                                     subprocess.run(["shutdown", "-h", "now"])
                                 case _:
@@ -185,42 +235,7 @@ class Client:
         mouse_supressor.stop()
         keyboard_supressor.stop()
 
-class Packet:
-    def __init__(self, message: bytes, aesgcm: AESGCM = None):
-        extracted_header_and_payload = extract_header_and_payload(message)
 
-        self.frame_id: int = extracted_header_and_payload[0][0]
-        self.chunk_id: int = extracted_header_and_payload[0][1]
-        self.total_chunks_count: int = extracted_header_and_payload[0][2]
-        self.nonce: bytes = extracted_header_and_payload[0][3]
-        self.payload: bytes = extracted_header_and_payload[1]
-
-        self.is_video_frame: bool = (self.frame_id != 0)
-
-        if not self.is_video_frame:
-            self.payload = json.loads(aesgcm.decrypt(self.nonce, self.payload, b"").decode())
-
-
-class Frame:
-    def __init__(self, packet: Packet):
-        self.frame_id = packet.frame_id
-        self.total_packets_count = packet.total_chunks_count
-        self.packets_count = 1
-        self.packets = [packet]
-        self.nonce = packet.nonce
-
-    def __add__(self, other):
-        if isinstance(other, Packet):
-            if self.frame_id != other.frame_id:
-                raise ValueError("Packet frame_id mismatch")
-            self.packets.append(other)
-            self.packets_count += 1
-        elif isinstance(other, Frame):
-            if self.frame_id != other.frame_id:
-                raise ValueError("Frames must have the same frame_id")
-            self.packets.extend(other.packets)
-            self.packets_count += other.packets_count
-        return self
 
 
 

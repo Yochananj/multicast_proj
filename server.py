@@ -11,8 +11,15 @@ from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from mss import MSS
 
-from constants import max_chunk_size, ttl, multicast_port, multicast_group, announcement_port
-from protocol import create_packet_header
+from protocol import create_packet_header, header_struct_size
+
+max_chunk_size = 1400 - header_struct_size
+
+announcement_port = 26762
+multicast_group = '224.67.67.67'
+multicast_port = 20202
+ttl = 1
+
 
 
 class Server:
