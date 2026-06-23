@@ -29,6 +29,7 @@ class GUI:
         for control in [self.death_button, self.kill_button, self.stop_screen_sharing_button,
                         self.start_screen_sharing_button, self.toggle_freeze_button, self.password_text_field,
                         self.confirm_password_button, self.status_text]:
+
             self.page.add(control)
 
         self._attach_buttons_to_handlers()
@@ -51,7 +52,6 @@ class GUI:
         if self.server.is_sharing_screen:
             self.server.stop_screen_share()
         self.start_screen_sharing_button.disabled, self.stop_screen_sharing_button.disabled = False, True
-
 
     def _upon_password_text_field_change(self):
         if self.password_text_field.value.strip() != "":

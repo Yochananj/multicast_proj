@@ -32,7 +32,7 @@ class Packet:
         self.is_video_frame: bool = (self.frame_id != 0)
 
         if not self.is_video_frame:
-            self.payload = json.loads(aesgcm.decrypt(self.nonce, self.payload, b"").decode())
+            self.payload = json.loads(aesgcm.decrypt(self.nonce, self.payload, b""))
 
 
 class Frame:
@@ -150,57 +150,58 @@ class Client:
             print(f"recived chunk from {addr}")
             packet = Packet(chunk, self.aesgcm)
 
-            match packet.is_video_frame:
-                case True:
-                    print(f"Received frame {packet.frame_id}")
-                    if packet.frame_id < self.last_displayed_frame:
-                        continue
+            if packet.is_video_frame:
+                print(f"Received frame {packet.frame_id}")
+                if packet.frame_id < self.last_displayed_frame:
+                    continue
 
-                    if packet.frame_id not in self.frames.keys():
-                        self.frames[packet.frame_id] = Frame(packet)
-                    else:
-                        self.frames[packet.frame_id] += packet
+                if packet.frame_id not in self.frames.keys():
+                    self.frames[packet.frame_id] = Frame(packet)
+                else:
+                    self.frames[packet.frame_id] += packet
 
-                    frame = self.frames[packet.frame_id]
+                frame = self.frames[packet.frame_id]
 
-                    if frame.total_packets_count == frame.packets_count:
-                        try:
-                            constructed_frame = self.construct_frame(frame)
-                            if self.display_frame(constructed_frame): return
-                            self.last_displayed_frame = frame.frame_id
-                        except Exception as e:
-                            print(f"Decryption failed for frame {frame.frame_id}: {e}")
-
-
-                        keys_to_remove = [k for k in self.frames.keys() if k <= frame.frame_id]
-                        for k in keys_to_remove:
-                            self.frames.pop(k)
-                case False:
-                    print(f"Received command: {packet.payload}")
-                    match packet.payload["command"]:
-                        case "freeze":
-                             if not self.freezing_thread or self.frozen_until < time.time():
-                                self.freezing_thread = threading.Thread(target=self.freeze_keyboard_and_mouse, args=[packet.payload["timestamp"]])
-                                self.freezing_thread.start()
-                             else:
-                                 self.frozen_until = packet.payload["timestamp"]
-                             print(time.time(), packet.payload["timestamp"], packet.payload["timestamp"] - time.time())
-                             pass
-                        case "kill":
+                if frame.total_packets_count == frame.packets_count:
+                    try:
+                        constructed_frame = self.construct_frame(frame)
+                        if self.display_frame(constructed_frame):
                             return
-                        case "death":
-                            print("Death command received")
-                            match platform.system():
-                                case "Windows":
-                                    print("Shutting down...")
-                                    subprocess.run(["shutdown", "/s", "/f", "/t", "0"])
-                                case "Linux" | "Darwin":
-                                    subprocess.run(["shutdown", "-h", "now"])
-                                case _:
-                                    print("Unsupported platform")
-                                    exit(1)
-                        case _:
-                            print(f"Unknown command: {packet.payload['command']}")
+                        self.last_displayed_frame = frame.frame_id
+                    except Exception as e:
+                        print(f"Decryption failed for frame {frame.frame_id}: {e}")
+
+
+                    keys_to_remove = [k for k in self.frames.keys() if k <= frame.frame_id]
+                    for k in keys_to_remove:
+                        self.frames.pop(k)
+
+            else:
+                print(f"Received command: {packet.payload}")
+                match packet.payload["command"]:
+                    case "freeze":
+                         if not self.freezing_thread or self.frozen_until < time.time():
+                            self.freezing_thread = threading.Thread(target=self.freeze_keyboard_and_mouse, args=[packet.payload["timestamp"]])
+                            self.freezing_thread.start()
+                         else:
+                             self.frozen_until = packet.payload["timestamp"]
+                         print(time.time(), packet.payload["timestamp"], packet.payload["timestamp"] - time.time())
+                         pass
+                    case "kill":
+                        return
+                    case "death":
+                        print("Death command received")
+                        match platform.system():
+                            case "Windows":
+                                print("Shutting down...")
+                                subprocess.run(["shutdown", "/s", "/f", "/t", "0"])
+                            case "Linux" | "Darwin":
+                                subprocess.run(["shutdown", "-h", "now"])
+                            case _:
+                                print("Unsupported platform")
+                                exit(1)
+                    case _:
+                        print(f"Unknown command: {packet.payload['command']}")
 
     def construct_frame(self, frame: Frame):
         # Sort packets by chunk_id and join them
@@ -243,4 +244,3 @@ class Client:
 
 if __name__ == "__main__":
     client = Client()
-    client.get_messages()

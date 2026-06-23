@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6802542e-a98d-4ebc-b956-cebaf901208a" name="Changes" comment="Add initial implementation of server, client, GUI, and protocol modules">
-      <change beforePath="$PROJECT_DIR$/.idea/NewYahelProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NewYahelProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="6802542e-a98d-4ebc-b956-cebaf901208a" name="Changes" comment="Binding fix">
       <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +91,7 @@
   <component name="RecapUselessUpdatesCounter">
     <option name="suspendCountdown" value="0" />
   </component>
-  <component name="RunManager" selected="Python.client">
+  <component name="RunManager" selected="Python.gui">
     <configuration name="client" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="NewYahelProject" />
       <option name="ENV_FILES" value="" />
@@ -214,8 +214,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.client" />
         <item itemvalue="Python.gui" />
+        <item itemvalue="Python.client" />
         <item itemvalue="Python.protocol" />
         <item itemvalue="Python.scratch_7" />
       </list>
@@ -250,7 +250,23 @@
       <option name="project" value="LOCAL" />
       <updated>1781388673922</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Binding fix">
+      <option name="closed" value="true" />
+      <created>1782241880289</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1782241880289</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Binding fix">
+      <option name="closed" value="true" />
+      <created>1782241888076</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1782241888076</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,13 +285,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add initial implementation of server, client, GUI, and protocol modules" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add initial implementation of server, client, GUI, and protocol modules" />
+    <MESSAGE value="Binding fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Binding fix" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/NewYahelProject$scratch_7.coverage" NAME="scratch_7 Coverage Results" MODIFIED="1781291976562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/NewYahelProject$protocol.coverage" NAME="protocol Coverage Results" MODIFIED="1781355583861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NewYahelProject$server.coverage" NAME="server Coverage Results" MODIFIED="1781358940140" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/NewYahelProject$gui.coverage" NAME="gui Coverage Results" MODIFIED="1782241325904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NewYahelProject$gui.coverage" NAME="gui Coverage Results" MODIFIED="1782242168228" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NewYahelProject$client.coverage" NAME="client Coverage Results" MODIFIED="1782241754559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -20,7 +20,7 @@ multicast_group = '224.67.67.67'
 multicast_port = 20202
 ttl = 1
 
-
+broadcast_fps = 30
 
 class Server:
     def __init__(self):
@@ -73,7 +73,7 @@ class Server:
                     try:
                         self.send_multicast_message(frame_bytes, self.frame_id)
                         print("Sent message")
-                        time.sleep(1/30)
+                        time.sleep(1/broadcast_fps)
 
                     except OSError as e:
                         print(f"Error: {e}\nMessage length: {len(frame_bytes)}")
