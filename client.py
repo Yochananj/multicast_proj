@@ -74,6 +74,7 @@ class Client:
         self.freezing_thread = None
 
         print("Waiting for multicast announcement...")
+
         try:
             servers = self.listen_for_multicast_announcement()
             for i in range(len(servers)):
@@ -89,6 +90,7 @@ class Client:
                 salt=self.salt,
                 iterations=200_000,
             ).derive(input(f"Enter password for {group}:{port}:\n").strip().encode())
+
             self.aesgcm = AESGCM(self.key)
             print("Password accepted. Starting to receive messages...")
         except Exception as e:
@@ -106,7 +108,7 @@ class Client:
         local_ip = s.getsockname()[0]
         s.close()
 
-        self.socket.bind((local_ip, port))
+        self.socket.bind(("0.0.0.0", port))
 
         mreq = struct.pack("4s4s", socket.inet_aton(group), socket.inet_aton(local_ip))
         self.socket.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP, mreq)

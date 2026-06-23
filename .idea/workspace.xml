@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6802542e-a98d-4ebc-b956-cebaf901208a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    <list default="true" id="6802542e-a98d-4ebc-b956-cebaf901208a" name="Changes" comment="Add initial implementation of server, client, GUI, and protocol modules">
       <change beforePath="$PROJECT_DIR$/.idea/NewYahelProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/NewYahelProject.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,7 +15,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="15" />
+    <option name="cachedIndexableFilesCount" value="14" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -31,7 +27,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -48,65 +43,6 @@
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
-  </component>
-  <component name="NextEditCompletionFeaturesState">
-    <decayedCancelled>
-      <entry key="MS100" value="1.0000002335119957" />
-      <entry key="MS500" value="1.047169561520199" />
-      <entry key="S2" value="1.4677349544119367" />
-      <entry key="S5" value="1.8774195005537684" />
-      <entry key="S10" value="2.67070617276332" />
-      <entry key="S30" value="5.614884744137886" />
-      <entry key="S60" value="10.735936519458606" />
-      <entry key="M2" value="26.346586342730774" />
-      <entry key="M5" value="73.85136402280509" />
-      <entry key="M10" value="114.73556440874789" />
-      <entry key="M15" value="134.18493717066036" />
-      <entry key="M30" value="157.64269102663735" />
-      <entry key="H1" value="171.1456207257729" />
-      <entry key="H2" value="178.39522397927794" />
-      <entry key="H4" value="182.15208306102747" />
-      <entry key="D1" value="185.35225849441065" />
-      <entry key="W1" value="185.90730692341444" />
-    </decayedCancelled>
-    <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="0.0" />
-      <entry key="S30" value="0.0" />
-      <entry key="S60" value="0.0" />
-      <entry key="M2" value="0.0" />
-      <entry key="M5" value="0.0" />
-      <entry key="M10" value="0.0" />
-      <entry key="M15" value="0.0" />
-      <entry key="M30" value="0.0" />
-      <entry key="H1" value="0.0" />
-      <entry key="H2" value="0.0" />
-      <entry key="H4" value="0.0" />
-      <entry key="D1" value="0.0" />
-      <entry key="W1" value="0.0" />
-    </decayedSelected>
-    <decayedShown>
-      <entry key="MS100" value="0.9592641300833753" />
-      <entry key="MS500" value="1.0172054024062869" />
-      <entry key="S2" value="1.398748874155754" />
-      <entry key="S5" value="1.8199449578355442" />
-      <entry key="S10" value="2.6162528130776" />
-      <entry key="S30" value="5.577426353104159" />
-      <entry key="S60" value="10.70594955306945" />
-      <entry key="M2" value="26.320331150146597" />
-      <entry key="M5" value="73.83367412619008" />
-      <entry key="M10" value="114.72465422893846" />
-      <entry key="M15" value="134.17710270536972" />
-      <entry key="M30" value="157.638462034688" />
-      <entry key="H1" value="171.14342177065805" />
-      <entry key="H2" value="178.3941025078137" />
-      <entry key="H4" value="182.15151671260662" />
-      <entry key="D1" value="185.35216331356392" />
-      <entry key="W1" value="185.90729330668688" />
-    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -169,7 +105,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/client.py" />
@@ -194,7 +129,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gui.py" />
@@ -219,7 +153,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/protocol.py" />
@@ -244,7 +177,6 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch_7.py" />
@@ -269,7 +201,6 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="DEBUG_JUST_MY_CODE" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="RUN_TOOL" value="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/server.py" />
@@ -283,8 +214,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.gui" />
         <item itemvalue="Python.client" />
+        <item itemvalue="Python.gui" />
         <item itemvalue="Python.protocol" />
         <item itemvalue="Python.scratch_7" />
       </list>
@@ -309,8 +240,17 @@
       <workItem from="1781386409378" duration="8000" />
       <workItem from="1781386426053" duration="75000" />
       <workItem from="1781386549690" duration="510000" />
-      <workItem from="1781387076716" duration="1385000" />
+      <workItem from="1781387076716" duration="3411000" />
     </task>
+    <task id="LOCAL-00001" summary="Add initial implementation of server, client, GUI, and protocol modules">
+      <option name="closed" value="true" />
+      <created>1781388673922</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1781388673922</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,11 +267,15 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add initial implementation of server, client, GUI, and protocol modules" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add initial implementation of server, client, GUI, and protocol modules" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/NewYahelProject$scratch_7.coverage" NAME="scratch_7 Coverage Results" MODIFIED="1781291976562" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$APPLICATION_CONFIG_DIR$/scratches" />
     <SUITE FILE_PATH="coverage/NewYahelProject$protocol.coverage" NAME="protocol Coverage Results" MODIFIED="1781355583861" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/NewYahelProject$server.coverage" NAME="server Coverage Results" MODIFIED="1781358940140" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/NewYahelProject$gui.coverage" NAME="gui Coverage Results" MODIFIED="1781388469340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/NewYahelProject$client.coverage" NAME="client Coverage Results" MODIFIED="1781387740755" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NewYahelProject$gui.coverage" NAME="gui Coverage Results" MODIFIED="1782241325904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NewYahelProject$client.coverage" NAME="client Coverage Results" MODIFIED="1782241754559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
